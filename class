@@ -1,0 +1,35 @@
+public class accController
+{
+    @AuraEnabled
+    public static List<Account> getAcc()
+    {
+      
+       List<Account> results = [Select name,type,Phone  from Account  limit 10];
+        return results;
+    }
+    @AuraEnabled
+    public static List<Account> searchAccts(String searchKey)
+    {
+        String  name = '%'+searchKey+'%';
+      //  String strType = '%'+types+'%';
+        //String strPhone = '%'+phones+'%';
+       List<Account> resultss = [Select name,type,Phone  from Account where name LIKE : name  limit 10];
+        return resultss;
+    }
+    @AuraEnabled
+    public static List<Account> searchAccByType(String types)
+    {
+       
+      String strType = '%'+types+'%';
+       List<Account> resultss = [Select name,type,Phone  from Account where type LIKE : strType  limit 10];
+        return resultss;
+    }
+    @AuraEnabled
+    public static List<Account> searchAccByPhone(String phones)
+    {
+       
+      String strPhones = '%'+phones+'%';
+       List<Account> resultss = [Select name,type,Phone  from Account where phone LIKE : strPhones  limit 10];
+        return resultss;
+    }
+}
