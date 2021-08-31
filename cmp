@@ -1,0 +1,41 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                controller="accController" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="resultData" type="List"/>
+    <aura:attribute name="accList" type="List"/>
+    <div class="slds">
+    <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-max-medium-table--stacked-horizontal">
+        <thead>
+        <tr class="slds-text-heading--label">
+            <th scope="col" class="nobordetop" title="Name">
+                <lightning:input type="Text" placeholder="Search Account's Name here" onchange="{!c.handleChange1}" aura:id="searchName"/>
+            <div>Name</div>
+            </th>
+            <th scope="col" class="nobordertop" title="Type">
+                <lightning:input type="Text" placeholder="Search Account's type here" onchange="{!c.handleChange2}" aura:id="searchType"/>
+            <div>Type</div>
+            </th>
+            <th scope="col" class="nobordertop" title="Phone">
+                <lightning:input type="Text" placeholder="Search Account's phone here" onchange="{!c.handleChange3}" aura:id="searchPhone"/>
+            <div>Phone</div>
+            </th>
+            </tr>
+        </thead>
+        <tbody>
+        <aura:iteration items="{!v.resultData}" var="result">
+            <tr>
+            <td data-label="Id" title="Id">
+                <div><a data-record="{!result.Id}" onclick="{!c.redirectToSobject}">{!result.Name}</a></div>
+                </td>
+                <td data-label="Type" title="Type">
+                <div>{!result.Type}</div>
+                </td>
+                <td data-label="Phone" title="Phone">
+                <div>{!result.Phone}</div>
+                </td>
+            </tr>
+            </aura:iteration>
+        </tbody>
+        </table>
+    </div>
+</aura:component>
